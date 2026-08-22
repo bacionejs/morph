@@ -1,0 +1,31 @@
+<body style=background:#fff;margin:0><canvas id=C width=400 height=400 style=position:fixed;top:0;left:0;width:100dvmin;height:100dvmin>
+<script>
+let c=C.getContext`2d`,i=4,p=0,L,
+R=requestAnimationFrame,H=n=>String.fromCodePoint(127789+n),
+G=e=>{
+C.width=400;c.font='220px serif';c.textAlign='center';c.fillText(e,200,215);
+let d=c.getImageData(0,0,400,400).data,r=[],u=[1,1,0,-1,-1,-1,0,1],v=[0,1,1,1,0,-1,-1,-1],x,y,X,Y,D=0,k=0;
+for(;k<16e4;k++)if(d[k*4+3]>19&&x==null)X=x=k%400,Y=y=k/400|0;
+if(x!=null)do{
+r.push({x,y});
+for(let j=0;j<8;j++){
+let n=(D+5+j)%8,nx=x+u[n],ny=y+v[n];
+if(d[(ny*400+nx)*4+3]>19){x=nx;y=ny;D=n;break}
+}
+}while((x!=X||y!=Y)&&r.length<5e3);
+r[0]||(r=[{x:200,y:200}]);
+return[...Array(800)].map((_,j)=>r[j*r.length/800|0])
+},
+A=G(H(i)),B=G(H(i+1));
+R(F=t=>{
+let d=(t-L)/1e3||0,e,f,j=0;L=t;
+if((p+=d*.8)>=1)A=B,i++,B=G(H(i+1)),p=0;
+C.width=400;c.fillStyle='#000';
+e=p*p*(3-2*p);f=1-e;
+c.beginPath();
+for(;j<800;j++)c[j?'lineTo':'moveTo'](A[j].x*f+B[j].x*e,A[j].y*f+B[j].y*e);
+c.fill();
+R(F)
+})
+</script>
+
