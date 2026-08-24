@@ -2,6 +2,7 @@
 
 
 Morphs 1000s of shapes in only 1k 🤯  
-Converts emojis inline into vectors so that you can do interesting things with them.
+Converts emojis inline into vectors so that you can do interesting things with them.  
+Extracts and morphs glyphs using quantized Moore tracing and interpolation.
 
 [Try it](https://bacionejs.github.io/morph)
